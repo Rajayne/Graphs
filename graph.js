@@ -43,7 +43,23 @@ class Graph {
   }
 
   // this function returns an array of Node values using DFS
-  depthFirstSearch(start) {}
+  depthFirstSearch(start) {
+    let toVisitStack = [start];
+    let values = [];
+    let seen = new Set(toVisitStack);
+    while (toVisitStack.length) {
+      let current = toVisitStack.pop();
+      values.push(current.value);
+
+      current.adjacent.forEach((neighbor) => {
+        if (!seen.has(neighbor)) {
+          toVisitStack.push(neighbor);
+          seen.add(neighbor);
+        }
+      });
+    }
+    return values;
+  }
 
   // this function returns an array of Node values using BFS
   breadthFirstSearch(start) {
